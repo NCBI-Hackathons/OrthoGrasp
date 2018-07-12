@@ -28,7 +28,7 @@ Currently, this pipeline can be utilized to find orthologs between the following
 7. Rat (R Novergicus)
 8. Worm (C Elegans)
 
-## Pipeline Components 
+## Pipeline Components
 
 ![](https://github.com/NCBI-Hackathons/EvoAssert/blob/master/Screen%20Shot%202018-07-12%20at%2011.21.55%20AM.png)
 
