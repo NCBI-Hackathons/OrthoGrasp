@@ -15,4 +15,4 @@ RUN git clone -b feature/container https://github.com/NCBI-Hackathons/OrthoGrasp
 
 # Run python script to copy data from omabrowser
 RUN mkdir OrthoGrasp/data && \
-    python3 OrthoGrasp/scripts/oma-download.py
+    python3 OrthoGrasp/scripts/oma-download.py -o OrthoGrasp/data/
