@@ -4,7 +4,7 @@ import io
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--out-dir", help="sets the output directory for oma files",
+parser.add_argument("out-dir", help="sets the output directory for oma files",
                     action="store_true")
 args = parser.parse_args()
 
