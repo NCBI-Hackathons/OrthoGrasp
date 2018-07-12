@@ -33,6 +33,10 @@ for my $ref ($omaRef1,$omaRef2){
 	my ($omaID,$refID) = split (/\t/,$_);
 	$refID =~ s/transcript_id=//g;
 	$refID =~ s/ /,/g;
+	# Strip out the trailing decimal from Ensembl IDs
+	if ($refID =~ /^(EN\w+)\.\d+/){
+	    $refID = $1;
+	}
 	if (exists($synonyms{$omaID})){
 	    $synonyms{$omaID} .= ",$refID";
 	}else {
