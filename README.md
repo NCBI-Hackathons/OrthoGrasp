@@ -1,2 +1,2 @@
-# EvoAssert
-A pipeline to support biological assertions with evolutionary information
+# ORTHOGRASP - 
+A tool to identify orthology information in several species of interest
