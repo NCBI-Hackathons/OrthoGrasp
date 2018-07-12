@@ -2,7 +2,7 @@
 A tool to identify orthology information in several species of interest
 
 ![](https://github.com/NCBI-Hackathons/EvoAssert/blob/master/orthograsp.jpg)
-<img src="https://github.com/NCBI-Hackathons/EvoAssert/blob/master/orthograsp.jpg" width="200" height="400" />
+<img src="https://github.com/NCBI-Hackathons/EvoAssert/blob/master/orthograsp.jpg" width="400" height="400" />
 
 ## Why study orthology?
 The identification of orthologs of proteins across species is critical for understanding evolutionary relationships as well  for the annotation of protein sequences from newly sequenced organisms. An integrative tool that allows us to obtain orthologous sequences for a set of genes would be very useful for taking forward phylogenetic studies and
