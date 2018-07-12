@@ -5,14 +5,7 @@ MAINTAINER Phillip Rak <phillip.rak@northwestern.edu>
 RUN apt-get update && apt-get upgrade -y
 
 # Install utilities
-RUN apt-get install wget -y
+RUN apt-get install wget python3-pip -y
 
 # Install dependencies
-RUN apt-get install ncbi-blast+ mcl -y
-#  Install fastme
-RUN wget http://www.atgc-montpellier.fr/download/sources/fastme/fastme-2.1.5.tar.gz
-# RUN tar xzf fastme-2.1.5.tar.gz 
-
-# Install OrthoFinder
-RUN wget https://github.com/davidemms/OrthoFinder/releases/download/v2.2.6/OrthoFinder-2.2.6.tar.gz
-RUN tar xzf OrthoFinder-2.2.6.tar.gz
+RUN pip3 install pandas requests
