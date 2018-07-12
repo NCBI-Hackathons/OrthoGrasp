@@ -12,7 +12,7 @@ workdir = /OrthoGrasp/data/
 # This effectively sets which species OMA ids can be converted from.
 for species in "CAEEL" "DANRE" "DROME" "HUMAN" "MOUSE" "PANTR" "RATNO" "TAKRU"
 do
-    grep ^$species $workdir+=oma-ensembl.txt > $workdir+=$species-ensembl.sub.txt
+    grep ^$species ../data/oma-ensembl.txt > ../data/$species-ensembl.sub.txt
 done
 
 # For each of those species files defined above, find the species names and
