@@ -19,14 +19,14 @@ Requires Jupyter notebook installed
 
 ## Species Functionality
 Currently, this pipeline can be utilized to find orthologs between the following species.
-1. Human (H Sapiens)
-2. Chimpanzee (P Troglodytes)
-3. Mouse (M Musculus)
-4. Zebrafish ( D Rerio)
-5. Fruitfly (D Melanogaster)
-6. Pufferfish (T Rubriripes)
-7. Rat (R Novergicus)
-8. Worm (C Elegans)
+1. Human (*H. sapiens*)
+2. Chimpanzee (*P. troglodytes*)
+3. Mouse (*M. musculus*)
+4. Zebrafish (*D. rerio*)
+5. Fruitfly (*D. melanogaster*)
+6. Pufferfish (*T. rubriripes*)
+7. Rat (*R. novergicus*)
+8. Worm (*C. elegans*)
 
 ## Pipeline Components
 
