@@ -2,6 +2,7 @@
 A tool to identify orthology information in several species of interest
 
 ![](https://github.com/NCBI-Hackathons/EvoAssert/blob/master/orthograsp.jpg)
+<img src="https://github.com/NCBI-Hackathons/EvoAssert/blob/master/orthograsp.jpg" width="200" height="400" />
 
 ## Why study orthology?
 The identification of orthologs of proteins across species is critical for understanding evolutionary relationships as well  for the annotation of protein sequences from newly sequenced organisms. An integrative tool that allows us to obtain orthologous sequences for a set of genes would be very useful for taking forward phylogenetic studies and
@@ -19,14 +20,14 @@ Requires Jupyter notebook installed
 
 ## Species Functionality
 Currently, this pipeline can be utilized to find orthologs between the following species.
-1. Human (*H. sapiens*)
-2. Chimpanzee (*P. troglodytes*)
-3. Mouse (*M. musculus*)
-4. Zebrafish (*D. rerio*)
-5. Fruitfly (*D. melanogaster*)
-6. Pufferfish (*T. rubriripes*)
-7. Rat (*R. novergicus*)
-8. Worm (*C. elegans*)
+1. Human (H Sapiens)
+2. Chimpanzee (P Troglodytes)
+3. Mouse (M Musculus)
+4. Zebrafish ( D Rerio)
+5. Fruitfly (D Melanogaster)
+6. Pufferfish (T Rubriripes)
+7. Rat (R Novergicus)
+8. Worm (C Elegans)
 
 ## Pipeline Components
 
