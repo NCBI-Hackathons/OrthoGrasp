@@ -1,7 +1,6 @@
 # ORTHOGRASP 
 A tool to identify orthology information in several species of interest
 
-![](https://github.com/NCBI-Hackathons/EvoAssert/blob/master/orthograsp.jpg)
 <img src="https://github.com/NCBI-Hackathons/EvoAssert/blob/master/orthograsp.jpg" width="400" height="400" />
 
 ## Why study orthology?
