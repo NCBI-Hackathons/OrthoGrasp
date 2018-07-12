@@ -5,7 +5,7 @@ import argparse
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-o", "--out", help="sets the output directory for oma files", type=string)
+    parser.add_argument("-o", "--out", help="sets the output directory for oma files", type=str)
     args = parser.parse_args()
 
     x = ['CAEEL',
