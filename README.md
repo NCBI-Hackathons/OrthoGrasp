@@ -45,7 +45,7 @@ The OMA ("Orthologous MAtrix" ) Browser utilized hierarchial orthologous groups 
 #### b) EggNOG  - http://eggnogdb.embl.de/#/app/home
 The EggNOG tool has a database of orthologous groups with functional annotation. These were predicted using Clusters of Orthologous Groups (COGs). We generated a database for our species of interest from this tool that we can utilize to obtain the orthologs of a given set of genes. 
 
-### 3. BioMART query 
+### 3. Query BioMART
 Once we obtain a orthology gene set, we query Biomart to obtain the sequence of interest for every gene. 
 
 ### 4. Output Data
