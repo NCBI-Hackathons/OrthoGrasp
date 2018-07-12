@@ -5,7 +5,7 @@ import argparse
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-o", "--out-dir", help="sets the output directory for oma files",
+    parser.add_argument("-o", "--out", help="sets the output directory for oma files",
                         action="store_true")
     args = parser.parse_args()
 
@@ -29,7 +29,7 @@ def main():
                           'p2': j,
                           'p3': 'OMA'}
                 r = requests.request('GET', 'https://omabrowser.org/cgi-bin/gateway.pl', params=payload)
-                filename = str(args.out-dir) + str(i) + "_" + str(j) + "_" + "OMA.csv"
+                filename = str(args.out) + str(i) + "_" + str(j) + "_" + "OMA.csv"
                 df = pd.read_csv(io.StringIO(r.content.decode('utf-8')), header=None, delimiter="\t")
                 df.to_csv(filename, header=None, index=None, sep="\t")
 
