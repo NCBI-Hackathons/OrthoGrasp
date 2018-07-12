@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # This has all of the data for all of the OMA ids for all species.
 # cd data
 # wget https://omabrowser.org/All/oma-ensembl.txt.gz
@@ -5,6 +7,7 @@
 # cd ..
 
 workdir=/OrthoGrasp/data/
+scriptdir=/OrthGrasp/scripts/
 
 touch workdir+=failedOMAparses.txt
 
@@ -28,7 +31,7 @@ do
 	echo $species2
 	if [ $species1 != $species2 ]
 	   then
-	       (perl parseOMA.2.pl $workdir+=$species1\_$species2\_OMA.csv $workdir+=$species1-ensembl.sub.txt $workdir+=$species2-ensembl.sub.txt > $workdir+=$species1\_$species2\_OMA.withSyn.txt) 2>> failedOMAparses.txt
+	       (perl scriptsdir+=parseOMA.2.pl $workdir+=$species1\_$species2\_OMA.csv $workdir+=$species1-ensembl.sub.txt $workdir+=$species2-ensembl.sub.txt > $workdir+=$species1\_$species2\_OMA.withSyn.txt) 2>> failedOMAparses.txt
 	fi
     done
 done
