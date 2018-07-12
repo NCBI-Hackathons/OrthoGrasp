@@ -1,13 +1,12 @@
-rm failedOMAparses.txt
-touch failedOMAparses.txt
-
 # This has all of the data for all of the OMA ids for all species.
 # cd data
 # wget https://omabrowser.org/All/oma-ensembl.txt.gz
 # gunzip oma-ensembl.txt.gz
 # cd ..
 
-workdir = /OrthoGrasp/data/
+workdir=/OrthoGrasp/data/
+
+touch workdir+=failedOMAparses.txt
 
 # This effectively sets which species OMA ids can be converted from.
 for species in "CAEEL" "DANRE" "DROME" "HUMAN" "MOUSE" "PANTR" "RATNO" "TAKRU"
