@@ -52,7 +52,10 @@ RUN chmod +x parseAllOMA.sh && \
 WORKDIR /OrthoGrasp/data
 RUN wget http://eggnogdb.embl.de/download/eggnog_4.5/data/meNOG/meNOG.members.tsv.gz
 
-# Run processing script for eggnog data
+# Install R dependencies
+RUN Rscript -e "install.packages('readr')"
+RUN Rscript -e "install.packages('dplyr')"
+
 
 # TODO: We need to install R; Any R dependencies?
 # TODO: We need to install Jupyter Notebook
