@@ -1,13 +1,33 @@
-FROM ubuntu:18.04
+FROM ubuntu:18.04 as base
 MAINTAINER Phillip Rak <phillip.rak@northwestern.edu>
 
 # Update the container
 RUN apt-get update && apt-get upgrade -y
 
-# Install utilities
-RUN apt-get install wget python3-pip git -y
+RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true
 
-# Install dependencies
+# Install tzdata
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
+
+# Install utilities
+RUN apt-get update && \
+    apt-get install locales wget python3-pip git -y
+
+# Configure the default locale for r-base install
+## Configure default locale, see https://github.com/rocker-org/rocker/issues/19
+# Set the locale
+RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+    locale-gen
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
+
+RUN ln -fs /usr/share/zoneinfo/US/Pacific-New /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
+
+# Install r-base
+RUN apt-get install r-base -y
+
+# Install python dependencies
 RUN pip3 install pandas requests
 
 # Clone the repo so that we can run our scripts
