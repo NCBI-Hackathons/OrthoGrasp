@@ -63,6 +63,7 @@ Rscript --vanilla master_script.R omabrowser ~/EvoAssert/humansurvival3.txt huma
  arg2 (required) - input file of genes in ensembl gene id with no header
  arg3 (required) - original species
  arg4 (required) - species of interest to find orthologs (choose between human, worm, fly, mouse, rat, pufferfish, chimp, zebrafish or all)
+ arg5 (required) - output name
 
 #### (2) Query Biomart
 
