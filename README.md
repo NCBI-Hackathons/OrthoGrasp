@@ -59,9 +59,13 @@ This pipeline can be run using 2 main R scripts. One that calls and runs the dat
 #### (1) Orthology engine 
 
 Rscript --vanilla master_script.R omabrowser ~/EvoAssert/humansurvival3.txt human all
+ 
  arg1 (required) - method (eggnog, omabrowser)
+ 
  arg2 (required) - input file of genes in ensembl gene id with no header
+ 
  arg3 (required) - original species
+ 
  arg4 (required) - species of interest to find orthologs (choose between human, worm, fly, mouse, rat, pufferfish, chimp, zebrafish or all)
  arg5 (required) - output name
 
