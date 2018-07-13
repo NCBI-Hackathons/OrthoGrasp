@@ -1,4 +1,4 @@
-setwd("/Users/zrt781/project/hackathon2018/EvoAssert")
+setwd("/OrthoGrasp/data")
 library(biomaRt)
 ?useMart
 mart=useMart("ensembl")
