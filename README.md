@@ -53,6 +53,12 @@ Once we obtain a orthology gene set, we query Biomart to obtain the sequence of 
 
 This sequence data is combined together into a fasta file that has all the sequence information for all the orthologs of a given set of genes in all species chosen. 
 
+### Usage
+This pipeline can be run using 2 main R scripts. One that calls and runs the dataset through the orthology engine either OMA Browser or EggNOG. And the other script takes the output of the orthology engine, parses through it and queries BioMart to get the sequences.  
+
+### Docker
+
+Coming Up
 
 
 
