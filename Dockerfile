@@ -34,12 +34,13 @@ RUN pip3 install pandas requests
 RUN git clone -b feature/container https://github.com/NCBI-Hackathons/OrthoGrasp.git
 
 # Run python script to copy data from omabrowser
-WORKDIR OrthoGrasp
+WORKDIR /OrthoGrasp
 RUN mkdir data && \
     python3 scripts/oma-download.py -o data/
+    # TODO: Make an init script that will docker exec this script
 
 # Get more data from omabrowser
-WORKDIR data
+WORKDIR /OrthoGrasp/data
 RUN wget https://omabrowser.org/All/oma-ensembl.txt.gz && \
     gunzip oma-ensembl.txt.gz
 
@@ -47,17 +48,23 @@ RUN wget https://omabrowser.org/All/oma-ensembl.txt.gz && \
 WORKDIR /OrthoGrasp/scripts
 RUN chmod +x parseAllOMA.sh && \
     ./parseAllOMA.sh
+    # TODO: Make an init script that will docker exec this script
 
 # Download the eggnog data
 WORKDIR /OrthoGrasp/data
-RUN wget http://eggnogdb.embl.de/download/eggnog_4.5/data/meNOG/meNOG.members.tsv.gz
+RUN wget http://eggnogdb.embl.de/download/eggnog_4.5/data/meNOG/meNOG.members.tsv.gz \
+    && gunzip meNOG.members.tsv.gz
 
 # Install R dependencies
 RUN Rscript -e "install.packages('readr')"
 RUN Rscript -e "install.packages('dplyr')"
+RUN Rscript -e "install.packages('stringr')"
 
+# Run processing script for eggnog data
+WORKDIR /OrthoGrasp/scripts
+RUN Rscript eggnog_species_filter.R
+# TODO: Make an init script that will docker exec this script
 
 # TODO: We need to install R; Any R dependencies?
 # TODO: We need to install Jupyter Notebook
 # TODO: We need to launch Jupyter Notebook
-
