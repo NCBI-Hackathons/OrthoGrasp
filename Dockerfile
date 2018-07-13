@@ -48,6 +48,12 @@ WORKDIR /OrthoGrasp/scripts
 RUN chmod +x parseAllOMA.sh && \
     ./parseAllOMA.sh
 
+# Download the eggnog data
+WORKDIR /OrthoGrasp/data
+RUN wget http://eggnogdb.embl.de/download/eggnog_4.5/data/meNOG/meNOG.members.tsv.gz
+
+# Run processing script for eggnog data
+
 # TODO: We need to install R; Any R dependencies?
 # TODO: We need to install Jupyter Notebook
 # TODO: We need to launch Jupyter Notebook
