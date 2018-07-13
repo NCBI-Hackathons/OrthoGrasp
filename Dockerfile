@@ -11,7 +11,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
 
 # Install utilities
 RUN apt-get update && \
-    apt-get install locales wget python3-pip git -y
+    apt-get install locales wget python3-pip git curl libxml2-dev libcurl4-openssl-dev libssl-dev -y
 
 # Configure the default locale for r-base install
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
@@ -23,9 +23,15 @@ ENV LC_ALL en_US.UTF-8
 RUN ln -fs /usr/share/zoneinfo/US/Pacific-New /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
 
 # Install r-base and project dependencies
-RUN apt-get install r-base -y \
-    && Rscript -e "source('http://bioconductor.org/biocLite.R'); biocLite('topGO', suppressUpdates=TRUE)" \
-    && Rscript -e "install.packages('readr'); install.packages('dplyr'); install.packages('stringr'); install.packages('biomaRt')"
+RUN apt-get install r-base -y
+RUN Rscript -e "install.packages('readr')" -e "install.packages('dplyr')" -e "install.packages('stringr')" -e "install.packages('RCurl')" -e "install.packages('XML')" -e "install.packages('httr')"
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+   libfftw3-dev \
+   gcc && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
+RUN Rscript -e 'source("http://bioconductor.org/biocLite.R")' -e 'biocLite("biomaRt")'
 
 # Install python dependencies
 RUN pip3 install pandas requests
@@ -58,7 +64,9 @@ RUN chmod +x parseAllOMA.sh && \
 
 # Run processing script for eggnog data
 WORKDIR /OrthoGrasp/scripts
+COPY scripts/findbiomartdataset.R /OrthoGrasp/scripts
 RUN Rscript eggnog_species_filter.R
+RUN Rscript findbiomartdataset.R
 
 # TODO: Make an init script that will docker exec this script
 
