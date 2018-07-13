@@ -3,7 +3,7 @@
 library(readr)
 library(dplyr)
 
-df <- readr::read_tsv("meNOG.members.tsv", col_names = FALSE) %>%
+df <- readr::read_tsv("../data/meNOG.members.tsv", col_names = FALSE) %>%
     dplyr::select(X2, X6) %>%
     dplyr::mutate(genes = NA)
 
@@ -24,4 +24,4 @@ df_species <- df %>%
     dplyr::select(orthogroup = X2, genes)
 
 
-readr::write_tsv(df_species, "eggnog_spfiltered.tsv")
+readr::write_tsv(df_species, "../data/eggnog_spfiltered.tsv")
