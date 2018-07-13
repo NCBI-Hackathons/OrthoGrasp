@@ -5,7 +5,8 @@ A tool to identify orthology information in several species of interest
 
 ## Why study orthology?
 The identification of orthologs of proteins across species is critical for understanding evolutionary relationships as well  for the annotation of protein sequences from newly sequenced organisms. An integrative tool that allows us to obtain orthologous sequences for a set of genes would be very useful for taking forward phylogenetic studies and
-as well as for the identification of orthologous genomic features.
+as well as for the identification of orthologous genomic features. Additionally, it will facilitate the study of sequence evolution of a class of genes or a type of sequence across evolution as well as the evolution of microRNA-target relationships, evolution of cis regulatory modules, evolution of translational enhancers.
+
 
 ## What's the problem?
 Currently existing orthology engines do not provide the functionality that allows for us to query a list of genes but instead only offer a single-gene query interface. Additionally, most of the existing tools provide the ability to identify a sequence name and possibly the alignment between of proteins in 2 or more species, but do allow the ability to retrieve other orthologous gene information - including gene/proteins sequence or promoter information or 3' or 5'UTR.
