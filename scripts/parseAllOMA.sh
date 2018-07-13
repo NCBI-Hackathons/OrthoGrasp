@@ -31,7 +31,7 @@ do
 	echo $species2
 	if [ $species1 != $species2 ]
 	   then
-	       (perl $scriptsdir+=parseOMA.2.pl $workdir+=$species1\_$species2\_OMA.csv $workdir+=$species1-ensembl.sub.txt $workdir+=$species2-ensembl.sub.txt > $workdir+=$species1\_$species2\_OMA.withSyn.txt) 2>> failedOMAparses.txt
+	       (perl $scriptsdir+=parseOMA.2.pl $workdir$species1\_$species2\_OMA.csv $workdir$species1-ensembl.sub.txt $workdir$species2-ensembl.sub.txt > $workdir$species1\_$species2\_OMA.withSyn.txt) 2>> failedOMAparses.txt
 	fi
     done
 done
