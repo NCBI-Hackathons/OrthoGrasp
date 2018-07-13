@@ -12,7 +12,7 @@ as well as for the identification of orthologous genomic features. Additionally,
 Currently existing orthology engines do not provide the functionality that allows for us to query a list of genes but instead only offer a single-gene query interface. Additionally, most of the existing tools provide the ability to identify a sequence name and possibly the alignment between of proteins in 2 or more species, but do allow the ability to retrieve other orthologous gene information - including gene/proteins sequence or promoter information or 3' or 5'UTR.
 
 ## What's new?
-Orthograsp is an integrative tool that provides end to end functionality to identify orthologs. This pipeline can be utilized to obtain orthologous sequences for a given set of genes by harnessing a orthology engine and retrieving sequence information from BioMart. By inputing a list of genes of interest, we can obtain an output fasta file with sequences from the different species of interest. For eg. if you had a list of genes of a given GO term in humans, you could identify all the orthologous genes in your model organism of interest - say, zebrafish through this quick and easy pipeline. Not only does the tool give you the names of the genes in zebrafish, it would also get you the cDNA sequences of the genes or 3' UTR sequences etc curated into a single FASTA file. Additionally, you could do the analysis to find the orthologs in multiple species. 
+Orthograsp is an integrative tool that provides end to end functionality to identify orthologs. This pipeline can be utilized to obtain orthologous sequences for a given set of genes by harnessing a orthology engine and retrieving sequence information from BioMart. By inputing a list of genes of interest, we can obtain an output fasta file with sequences from the different species of interest. For eg. if one had a list of genes of a given GO term in humans, the tool could be used identify all the orthologous genes in your model organism of interest - say, zebrafish through this quick and easy pipeline. Not only does the tool give the names of the genes in zebrafish, it would also get the cDNA sequences of the genes or 3' UTR sequences etc curated into a single FASTA file. Additionally, this analysis is not limited to a single organism but can be done simultaenously to find the orthologs in multiple species. 
 
 ## Dependencies 
 
@@ -20,14 +20,14 @@ Requires Jupyter notebook installed
 
 ## Species Functionality
 Currently, this pipeline can be utilized to find orthologs between the following species.
-1. Human (H Sapiens)
-2. Chimpanzee (P Troglodytes)
-3. Mouse (M Musculus)
-4. Zebrafish ( D Rerio)
-5. Fruitfly (D Melanogaster)
-6. Pufferfish (T Rubriripes)
-7. Rat (R Novergicus)
-8. Worm (C Elegans)
+1. Human (H sapiens)
+2. Chimpanzee (P troglodytes)
+3. Mouse (M musculus)
+4. Zebrafish ( D rerio)
+5. Fruitfly (D melanogaster)
+6. Pufferfish (T rubriripes)
+7. Rat (R novergicus)
+8. Worm (C elegans)
 
 ## Pipeline Components
 
