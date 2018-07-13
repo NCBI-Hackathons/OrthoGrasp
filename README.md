@@ -41,10 +41,10 @@ The reference genome must be specified as one of the arguments. As does the requ
 ### 2. Orthology Engines
 
 #### a) OMA Browser -  https://omabrowser.org/
-The OMA ("Orthologous MAtrix" ) Browser utilized hierarchial orthologous groups (HOGs) to identify orthologs between species. We utilized the browser to generate pairwise comparisons between our species and generated a database that we can query to obtain the orthologs from other species.
+The OMA ("Orthologous MAtrix" ) Browser utilized hierarchial orthologous groups (HOGs) to identify orthologs between species. We utilized the browser to generate pairwise comparisons between our species and generated a database that we can query to obtain the orthologs from other species. Faster and more efficient because the code does not need to convert between ids - will matter if querying larger (more than 100 genes) datasets. Does not list paralogs of the reference species.
 
 #### b) EggNOG  - http://eggnogdb.embl.de/#/app/home
-The EggNOG tool has a database of orthologous groups with functional annotation. These were predicted using Clusters of Orthologous Groups (COGs). We generated a database for our species of interest from this tool that we can utilize to obtain the orthologs of a given set of genes. 
+The EggNOG tool has a database of orthologous groups with functional annotation. These were predicted using Clusters of Orthologous Groups (COGs). We generated a database for our species of interest from this tool that we can utilize to obtain the orthologs of a given set of genes. Tool can be used to generate paralogs in the reference species.
 
 ### 3. Query BioMART
 Once we obtain a orthology gene set, we query Biomart to obtain the sequence of interest for every gene. 
