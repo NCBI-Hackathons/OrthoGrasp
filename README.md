@@ -16,7 +16,7 @@ Orthograsp is an integrative tool that provides end to end functionality to iden
 
 ## Dependencies 
 
-Requires Jupyter notebook installed
+Requires R and Jupyter notebook installed
 
 ## Species Functionality
 Currently, this pipeline can be utilized to find orthologs between the following species.
@@ -56,14 +56,16 @@ This sequence data is combined together into a fasta file that has all the seque
 ### Usage
 This pipeline can be run using 2 main R scripts. One that calls and runs the dataset through the orthology engine either OMA Browser or EggNOG. And the other script takes the output of the orthology engine, parses through it and queries BioMart to get the sequences.  
 
-(1) Orthology engine 
+#### (1) Orthology engine 
+
 Rscript --vanilla master_script.R omabrowser ~/EvoAssert/humansurvival3.txt human all
  arg1 (required) - method (eggnog, omabrowser)
  arg2 (required) - input file of genes in ensembl gene id with no header
  arg3 (required) - original species
  arg4 (required) - species of interest to find orthologs (choose between human, worm, fly, mouse, rat, pufferfish, chimp, zebrafish or all)
 
-(2) Query Biomart
+#### (2) Query Biomart
+
 Rscript get_gene_sequence_clean.R
 
 ### Docker
