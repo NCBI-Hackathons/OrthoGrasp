@@ -37,28 +37,24 @@ RUN conda install --quiet --yes \
     'r-htmltools=0.3*' \
     'r-sparklyr=0.7*' \
     'r-htmlwidgets=1.0*' \
+    'r-readr' \
+    'r-dplyr' \
+    'r-stringr' \
+    'r-xml' \
+    'r-httr' \
     'r-hexbin=1.27*' && \
     conda clean -tipsy && \
 fix-permissions $CONDA_DIR
 
-# Install r-base and project dependencies
-RUN Rscript -e "install.packages('readr')" -e "install.packages('dplyr')" -e "install.packages('stringr')" -e "install.packages('RCurl')" -e "install.packages('XML')" -e "install.packages('httr')"
-
-RUN apt-get update \
- && apt-get install -y --no-install-recommends \
-   libfftw3-dev \
-   gcc && apt-get clean \
- && rm -rf /var/lib/apt/lists/*
-RUN Rscript -e 'source("http://bioconductor.org/biocLite.R")' -e 'biocLite("biomaRt")'
-
-# Install python dependencies
-RUN pip3 install pandas requests
+RUN conda install -c bioconda bioconductor-biomart --quiet --yes
 
 # Copy Clone the repo so that we can run our scripts
 COPY . /OrthoGrasp
 
 # Change work dir to data
 WORKDIR /OrthoGrasp/data
+
+USER root
 
 # Get data from omabrowser
 RUN wget https://omabrowser.org/All/oma-ensembl.txt.gz && \
