@@ -36,12 +36,10 @@ RUN Rscript -e 'source("http://bioconductor.org/biocLite.R")' -e 'biocLite("biom
 # Install python dependencies
 RUN pip3 install pandas requests
 
-# Clone the repo so that we can run our scripts
-RUN git clone -b feature/container https://github.com/NCBI-Hackathons/OrthoGrasp.git
+# Copy Clone the repo so that we can run our scripts
+COPY . /OrthoGrasp
 
-# Create data dir to house data
-WORKDIR /OrthoGrasp
-RUN mkdir data
+# Change work dir to data
 WORKDIR /OrthoGrasp/data
 
 # Get data from omabrowser
@@ -63,7 +61,6 @@ RUN chmod +x parseAllOMA.sh && \
     # TODO: Make an init script that will docker exec this script
 
 # Run processing script for eggnog data
-COPY scripts/findbiomartdataset.R /OrthoGrasp/scripts
 WORKDIR /OrthoGrasp/scripts
 RUN Rscript eggnog_species_filter.R
 RUN Rscript findbiomartdataset.R
