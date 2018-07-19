@@ -63,8 +63,8 @@ RUN chmod +x parseAllOMA.sh && \
     # TODO: Make an init script that will docker exec this script
 
 # Run processing script for eggnog data
-WORKDIR /OrthoGrasp/scripts
 COPY scripts/findbiomartdataset.R /OrthoGrasp/scripts
+WORKDIR /OrthoGrasp/scripts
 RUN Rscript eggnog_species_filter.R
 RUN Rscript findbiomartdataset.R
 
