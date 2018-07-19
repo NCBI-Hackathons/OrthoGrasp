@@ -1,29 +1,47 @@
-FROM ubuntu:18.04 as base
+# Copyright (c) Jupyter Development Team.
+# Distributed under the terms of the Modified BSD License.
+FROM jupyter/minimal-notebook
+
 MAINTAINER Phillip Rak <phillip.rak@northwestern.edu>
 
-# Update the container
-RUN apt-get update && apt-get upgrade -y
+USER root
 
-RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true
-
-# Install tzdata
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
-
-# Install utilities
+# R pre-requisites
 RUN apt-get update && \
-    apt-get install locales wget python3-pip git curl libxml2-dev libcurl4-openssl-dev libssl-dev -y
+    apt-get install -y --no-install-recommends \
+    fonts-dejavu \
+    tzdata \
+    gfortran \
+    gcc && apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-# Configure the default locale for r-base install
-RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
-    locale-gen
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
+USER $NB_UID
 
-RUN ln -fs /usr/share/zoneinfo/US/Pacific-New /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
+# R packages
+RUN conda install --quiet --yes \
+    'r-base=3.4.1' \
+    'r-irkernel=0.8*' \
+    'r-plyr=1.8*' \
+    'r-devtools=1.13*' \
+    'r-tidyverse=1.1*' \
+    'r-shiny=1.0*' \
+    'r-rmarkdown=1.8*' \
+    'r-forecast=8.2*' \
+    'r-rsqlite=2.0*' \
+    'r-reshape2=1.4*' \
+    'r-nycflights13=0.2*' \
+    'r-caret=6.0*' \
+    'r-rcurl=1.95*' \
+    'r-crayon=1.3*' \
+    'r-randomforest=4.6*' \
+    'r-htmltools=0.3*' \
+    'r-sparklyr=0.7*' \
+    'r-htmlwidgets=1.0*' \
+    'r-hexbin=1.27*' && \
+    conda clean -tipsy && \
+fix-permissions $CONDA_DIR
 
 # Install r-base and project dependencies
-RUN apt-get install r-base -y
 RUN Rscript -e "install.packages('readr')" -e "install.packages('dplyr')" -e "install.packages('stringr')" -e "install.packages('RCurl')" -e "install.packages('XML')" -e "install.packages('httr')"
 
 RUN apt-get update \
