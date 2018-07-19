@@ -1,8 +1,12 @@
 # Copyright (c) Jupyter Development Team.
 # Distributed under the terms of the Modified BSD License.
-FROM jupyter/minimal-notebook
+FROM jupyter/scipy-notebook
 
 MAINTAINER Phillip Rak <phillip.rak@northwestern.edu>
+
+# Set when building on Travis so that certain long-running build steps can
+# be skipped to shorten build time.
+ARG TEST_ONLY_BUILD
 
 USER root
 
@@ -17,8 +21,9 @@ RUN apt-get update && \
 
 USER $NB_UID
 
-# R packages
+# R packages including IRKernel which gets installed globally.
 RUN conda install --quiet --yes \
+    'rpy2=2.8*' \
     'r-base=3.4.1' \
     'r-irkernel=0.8*' \
     'r-plyr=1.8*' \
@@ -44,7 +49,8 @@ RUN conda install --quiet --yes \
     'r-httr' \
     'r-hexbin=1.27*' && \
     conda clean -tipsy && \
-fix-permissions $CONDA_DIR
+    fix-permissions $CONDA_DIR && \
+    fix-permissions /home/$NB_USER
 
 RUN conda install -c bioconda bioconductor-biomart --quiet --yes
 
@@ -84,3 +90,4 @@ RUN Rscript findbiomartdataset.R
 # TODO: We need to install R; Any R dependencies?
 # TODO: We need to install Jupyter Notebook
 # TODO: We need to launch Jupyter Notebook
+WORKDIR /OrthoGrasp
