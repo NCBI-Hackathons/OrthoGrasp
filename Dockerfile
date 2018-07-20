@@ -1,48 +1,66 @@
-FROM ubuntu:18.04 as base
+# Copyright (c) Jupyter Development Team.
+# Distributed under the terms of the Modified BSD License.
+FROM jupyter/scipy-notebook
+
 MAINTAINER Phillip Rak <phillip.rak@northwestern.edu>
 
-# Update the container
-RUN apt-get update && apt-get upgrade -y
+# Set when building on Travis so that certain long-running build steps can
+# be skipped to shorten build time.
+ARG TEST_ONLY_BUILD
 
-RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true
+USER root
 
-# Install tzdata
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
-
-# Install utilities
+# R pre-requisites
 RUN apt-get update && \
-    apt-get install locales wget python3-pip git curl libxml2-dev libcurl4-openssl-dev libssl-dev -y
+    apt-get install -y --no-install-recommends \
+    fonts-dejavu \
+    tzdata \
+    gfortran \
+    gcc && apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-# Configure the default locale for r-base install
-RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
-    locale-gen
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
+USER $NB_UID
 
-RUN ln -fs /usr/share/zoneinfo/US/Pacific-New /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
+# R packages including IRKernel which gets installed globally.
+RUN conda install --quiet --yes \
+    'rpy2=2.8*' \
+    'r-base=3.4.1' \
+    'r-irkernel=0.8*' \
+    'r-plyr=1.8*' \
+    'r-devtools=1.13*' \
+    'r-tidyverse=1.1*' \
+    'r-shiny=1.0*' \
+    'r-rmarkdown=1.8*' \
+    'r-forecast=8.2*' \
+    'r-rsqlite=2.0*' \
+    'r-reshape2=1.4*' \
+    'r-nycflights13=0.2*' \
+    'r-caret=6.0*' \
+    'r-rcurl=1.95*' \
+    'r-crayon=1.3*' \
+    'r-randomforest=4.6*' \
+    'r-htmltools=0.3*' \
+    'r-sparklyr=0.7*' \
+    'r-htmlwidgets=1.0*' \
+    'r-readr' \
+    'r-dplyr' \
+    'r-stringr' \
+    'r-xml' \
+    'r-httr' \
+    'r-hexbin=1.27*' && \
+    conda clean -tipsy && \
+    fix-permissions $CONDA_DIR && \
+    fix-permissions /home/$NB_USER
 
-# Install r-base and project dependencies
-RUN apt-get install r-base -y
-RUN Rscript -e "install.packages('readr')" -e "install.packages('dplyr')" -e "install.packages('stringr')" -e "install.packages('RCurl')" -e "install.packages('XML')" -e "install.packages('httr')"
+RUN conda install -c bioconda bioconductor-biomart --quiet --yes
 
-RUN apt-get update \
- && apt-get install -y --no-install-recommends \
-   libfftw3-dev \
-   gcc && apt-get clean \
- && rm -rf /var/lib/apt/lists/*
-RUN Rscript -e 'source("http://bioconductor.org/biocLite.R")' -e 'biocLite("biomaRt")'
+# Copy Clone the repo so that we can run our scripts
+COPY . /OrthoGrasp
 
-# Install python dependencies
-RUN pip3 install pandas requests
-
-# Clone the repo so that we can run our scripts
-RUN git clone -b feature/container https://github.com/NCBI-Hackathons/OrthoGrasp.git
-
-# Create data dir to house data
-WORKDIR /OrthoGrasp
-RUN mkdir data
+# Change work dir to data
 WORKDIR /OrthoGrasp/data
+
+USER root
 
 # Get data from omabrowser
 RUN wget https://omabrowser.org/All/oma-ensembl.txt.gz && \
@@ -64,7 +82,6 @@ RUN chmod +x parseAllOMA.sh && \
 
 # Run processing script for eggnog data
 WORKDIR /OrthoGrasp/scripts
-COPY scripts/findbiomartdataset.R /OrthoGrasp/scripts
 RUN Rscript eggnog_species_filter.R
 RUN Rscript findbiomartdataset.R
 
@@ -73,3 +90,4 @@ RUN Rscript findbiomartdataset.R
 # TODO: We need to install R; Any R dependencies?
 # TODO: We need to install Jupyter Notebook
 # TODO: We need to launch Jupyter Notebook
+WORKDIR /OrthoGrasp
